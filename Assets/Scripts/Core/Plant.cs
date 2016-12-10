@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Plant : MonoBehaviour {
     
     public Sprite[] GrowStages;
+    public int OneStageGrowthTime = 1;
     public int GrowthTime { get { return GrowStages.Length; } }
     public Sprite CurrentGrowSprite { get { return GrowStages[_currentGrowstage]; } }
 
@@ -13,7 +14,7 @@ public class Plant : MonoBehaviour {
     private int[,] _shape = new int[_shapeSideSize, _shapeSideSize];
 
     public int InitialBuyCost;
-    public int InitialSellCost;
+    public int InitialGrowthValue;
     public int[] GrowthValueCost = new int[10];
     public int[] GrowthInfluence = new int[9];
 
