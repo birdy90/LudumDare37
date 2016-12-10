@@ -19,7 +19,8 @@ public class Field : MonoBehaviour {
     
     void Start()
     {
-        Instance = this; 
+        Instance = this;
+        _earth = new Cell[FieldWidth, FieldHeight];
         _plants = new GameObject[FieldWidth, FieldHeight];
         _influences = new int[FieldWidth, FieldHeight];
         InstantiateEarth();

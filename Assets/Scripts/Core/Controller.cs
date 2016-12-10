@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour {
                 {
                     if (hit.collider.CompareTag("Earth"))
                     {
-
+                        hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                     }
                 }
                 break;
