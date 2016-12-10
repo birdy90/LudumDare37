@@ -2,10 +2,13 @@
 
 public class Field : MonoBehaviour {
 
+    public static Field Instance;
+
     public int FieldWidth = 8;
     public int FieldHeight = 6;
     public GameObject EarthSprite;
 
+    private Cell[,] _earth;
     private GameObject[,] _plants;
     private int[,] _influences;
 
@@ -16,6 +19,7 @@ public class Field : MonoBehaviour {
     
     void Start()
     {
+        Instance = this; 
         _plants = new GameObject[FieldWidth, FieldHeight];
         _influences = new int[FieldWidth, FieldHeight];
         InstantiateEarth();
@@ -32,6 +36,10 @@ public class Field : MonoBehaviour {
             {
                 var newTile = Instantiate(EarthSprite);
                 newTile.transform.position = new Vector3(i, j, 1);
+                var cell = newTile.GetComponent<Cell>();
+                cell.SetRenderer(newTile.GetComponent<SpriteRenderer>());
+                cell.SetPos(i, j);
+                _earth[i, j] = cell;
             }
         }
     }
