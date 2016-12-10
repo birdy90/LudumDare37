@@ -3,15 +3,19 @@ using System.Collections;
 
 public class Cell : MonoBehaviour {
 
+    private int _x;
+    private int _y;
 
+    private SpriteRenderer _renderer;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void SetPos(int x, int y)
+    {
+        _x = x;
+        _y = y;
+    }
+
+    public void SetRenderer(SpriteRenderer renderer)
+    {
+        _renderer = renderer;
+    }
 }
