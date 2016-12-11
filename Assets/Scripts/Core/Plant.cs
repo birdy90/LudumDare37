@@ -11,7 +11,6 @@ public class Plant : MonoBehaviour {
 
     const int _shapeSideSize = 3;
     public List<int> Shape;
-    private int[,] _shape = new int[_shapeSideSize, _shapeSideSize];
 
     public int InitialBuyCost;
     public int InitialGrowthValue;
@@ -22,19 +21,15 @@ public class Plant : MonoBehaviour {
     private SpriteRenderer _renderer;
 
     public string Name;
-
-	// Use this for initialization
+    
 	void Start () {
-        for (var i = 0; i < _shapeSideSize; i++)
-            for (var j = 0; j < _shapeSideSize; j++)
-                _shape[i, j] = Shape[i * 3 + j];
         _renderer = GetComponent<SpriteRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public int GetShape(int x, int y)
+    {
+        return Shape[y * _shapeSideSize + x];
+    }
 
     public void Grow()
     {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Field : MonoBehaviour {
 
@@ -8,8 +9,11 @@ public class Field : MonoBehaviour {
     public int FieldHeight = 6;
     public GameObject EarthSprite;
 
-    private Cell[,] _earth;
-    private GameObject[,] _plants;
+    public Cell[,] Earth;
+    [HideInInspector]
+    public List<Plant> Plants;
+    [HideInInspector]
+    public int[,] PlantedCells;
     private int[,] _influences;
 
     public GameObject TestPlant;
@@ -20,13 +24,12 @@ public class Field : MonoBehaviour {
     void Start()
     {
         Instance = this;
-        _earth = new Cell[FieldWidth, FieldHeight];
-        _plants = new GameObject[FieldWidth, FieldHeight];
+        Earth = new Cell[FieldWidth, FieldHeight];
+        Plants = new List<Plant>();
+        PlantedCells = new int[FieldWidth, FieldHeight];
         _influences = new int[FieldWidth, FieldHeight];
         InstantiateEarth();
         _lastUpdateTime = Time.time;
-
-        Test();
     }
 
     public void InstantiateEarth()
@@ -40,15 +43,9 @@ public class Field : MonoBehaviour {
                 var cell = newTile.GetComponent<Cell>();
                 cell.SetRenderer(newTile.GetComponent<SpriteRenderer>());
                 cell.SetPos(i, j);
-                _earth[i, j] = cell;
+                Earth[i, j] = cell;
             }
         }
-    }
-
-    public void Test()
-    {
-        var plant = Instantiate(TestPlant);
-        PutPlant(plant, 1, 1);
     }
 	
 	void Update () {
@@ -61,7 +58,7 @@ public class Field : MonoBehaviour {
 
     public void Grow()
     {
-        foreach (var plant in _plants)
+        foreach (var plant in Plants)
         {
             if (plant != null)
                 plant.GetComponent<Plant>().Grow();
@@ -70,13 +67,17 @@ public class Field : MonoBehaviour {
 
     public void PutPlant(GameObject plant, int x, int y)
     {
-        _plants[x, y] = plant;
-        plant.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
+        var newPlant = Instantiate(plant.gameObject);
+        Plants.Add(newPlant.GetComponent<Plant>());
+        for (var i = -1; i < 2; i++)
+            for (var j = -1; j < 2; j++)
+                PlantedCells[i + x, j + y] += 1;
+        newPlant.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
     }
 
     public void ResetCellColors()
     {
-        foreach (var cell in _earth)
+        foreach (var cell in Earth)
             cell.SetColor(Color.white);
     }
 }

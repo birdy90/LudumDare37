@@ -14,6 +14,11 @@ public class Cell : MonoBehaviour {
         _y = y;
     }
 
+    public Vector2 GetPos()
+    {
+        return new Vector2(_x, _y);
+    }
+
     public void SetRenderer(SpriteRenderer renderer)
     {
         _renderer = renderer;

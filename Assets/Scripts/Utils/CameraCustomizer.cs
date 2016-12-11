@@ -7,6 +7,6 @@ public class CameraCustomizer : MonoBehaviour {
 
 	void Start () {
         var camera = gameObject.GetComponent<Camera>();
-        camera.transform.position = new Vector3(FieldController.FieldWidth / 2 + 0.75f, FieldController.FieldHeight / 2 + 1.5f, 0);
+        camera.transform.position = new Vector3(FieldController.FieldWidth / 2, FieldController.FieldHeight / 2 + 1.45f, 0);
 	}
 }
