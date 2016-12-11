@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using Completed;
 
 [RequireComponent(typeof(Field))]
 public class Controller : MonoBehaviour {
@@ -8,6 +9,10 @@ public class Controller : MonoBehaviour {
     private GameModes _gameMode = GameModes.None;
     private Field _field;
     private Plant _plantedPlant;
+
+    public AudioClip Clicking;
+    public AudioClip PickUp;
+    public AudioClip Failure;
 
     public enum GameModes
     {
@@ -42,9 +47,13 @@ public class Controller : MonoBehaviour {
                     var color = canPlant ? Color.green : Color.red;
                     HighLightPlantPosition(color, (int)pos.x, (int)pos.y);
 
-                    if (canPlant && Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        _field.PutPlant(_plantedPlant.gameObject, (int)pos.x, (int)pos.y);
+                        if (canPlant)  
+                            _field.PutPlant(_plantedPlant.gameObject, (int)pos.x, (int)pos.y);
+                        else
+                            SoundManager.instance.PlaySingle(Failure);
+
                     }
                 }
                 else
@@ -61,8 +70,9 @@ public class Controller : MonoBehaviour {
                     if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("GrownPlant"))
                     {
                         var plant = hit.collider.gameObject.transform.parent.gameObject;
-                        Destroy(plant);
                         Field.Instance.Plants.Remove(plant.GetComponent<Plant>());
+                        SoundManager.instance.PlaySingle(PickUp);
+                        Destroy(plant);
                     }
                 }
                 break;
@@ -137,6 +147,7 @@ public class Controller : MonoBehaviour {
 
     public void StartPlant(GameObject plant)
     {
+        SoundManager.instance.PlaySingle(Clicking);
         _plantedPlant = plant.GetComponent<Plant>();
         SetGameMode(GameModes.Planting);
     }

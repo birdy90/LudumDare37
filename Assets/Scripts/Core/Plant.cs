@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Completed;
 
 public class Plant : MonoBehaviour {
     
@@ -8,6 +9,8 @@ public class Plant : MonoBehaviour {
     public int OneStageGrowthTime = 1;
     public int GrowthTime { get { return GrowStages.Length; } }
     public Sprite CurrentGrowSprite { get { return GrowStages[_currentGrowstage]; } }
+
+    public AudioClip Growing;
 
     const int _shapeSideSize = 3;
     public List<int> Shape;
@@ -58,6 +61,8 @@ public class Plant : MonoBehaviour {
     {
         Field.Instance.RemovePlant(gameObject);
         gameObject.GetComponentInChildren<Animator>().SetTrigger("Float");
+        SoundManager.instance.PlaySingle(Growing);
+
         _renderer.gameObject.tag = "GrownPlant";
     }
 }

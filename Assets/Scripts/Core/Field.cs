@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Completed;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Field : MonoBehaviour {
@@ -8,6 +9,11 @@ public class Field : MonoBehaviour {
     public int FieldWidth = 8;
     public int FieldHeight = 6;
     public GameObject EarthSprite;
+
+    
+    public AudioClip PlantASeed;
+   
+   
 
     public Cell[,] Earth;
     [HideInInspector]
@@ -81,7 +87,7 @@ public class Field : MonoBehaviour {
                 if (newPlantComponent.GetShape(i + 1, j + 1) == 1)
                     PlantedCells[i + x, j + y] += 1;
         newPlant.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
-
+        SoundManager.instance.PlaySingle(PlantASeed);
         Money.Instance.Amount -= newPlantComponent.InitialBuyCost;
     }
 
