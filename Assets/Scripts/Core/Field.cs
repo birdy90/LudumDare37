@@ -16,8 +16,6 @@ public class Field : MonoBehaviour {
     public int[,] PlantedCells;
     private int[,] _influences;
 
-    public GameObject TestPlant;
-
     public int Timer = 0;
     private float _lastUpdateTime;
     
@@ -58,23 +56,40 @@ public class Field : MonoBehaviour {
 
     public void Grow()
     {
+        var grownPlants = new List<Plant>();
         foreach (var plant in Plants)
         {
             if (plant != null)
-                plant.GetComponent<Plant>().Grow();
+                if (plant.Grow())
+                    grownPlants.Add(plant);
         }
+        foreach (var plant in grownPlants)
+            plant.OverGrow();
     }
 
     public void PutPlant(GameObject plant, int x, int y)
     {
         var newPlant = Instantiate(plant.gameObject);
         var newPlantComponent = newPlant.GetComponent<Plant>();
+        newPlantComponent.PlantedTo = new Vector2(x, y);
         Plants.Add(newPlantComponent);
         for (var i = -1; i < 2; i++)
             for (var j = -1; j < 2; j++)
                 if (newPlantComponent.GetShape(i + 1, j + 1) == 1)
                     PlantedCells[i + x, j + y] += 1;
         newPlant.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
+    }
+
+    public void RemovePlant(GameObject plant)
+    {
+        var plantComponent = plant.GetComponent<Plant>();
+        var x = (int)plantComponent.PlantedTo.x;
+        var y = (int)plantComponent.PlantedTo.y;
+        Plants.Remove(plantComponent);
+        for (var i = -1; i < 2; i++)
+            for (var j = -1; j < 2; j++)
+                if (plantComponent.GetShape(i + 1, j + 1) == 1)
+                    PlantedCells[i + x, j + y] -= 1;
     }
 
     public bool PointInFieldBounds(int x, int y)

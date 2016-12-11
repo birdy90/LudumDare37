@@ -42,16 +42,26 @@ public class Controller : MonoBehaviour {
                     var color = canPlant ? Color.green : Color.red;
                     HighLightPlantPosition(color, (int)pos.x, (int)pos.y);
 
-                    if (canPlant && Input.GetMouseButton(0))
+                    if (canPlant && Input.GetMouseButtonDown(0))
                     {
-                        ResetGameMode();
                         _field.PutPlant(_plantedPlant.gameObject, (int)pos.x, (int)pos.y);
                     }
                 }
                 else
                 {
-                    if (Input.GetMouseButton(0))
+                    if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
                         ResetGameMode();
+                }
+                break;
+            case GameModes.None:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Debug.DrawRay(ray.origin, ray.direction, Color.red);
+                    _field.ResetCellColors();
+                    if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("GrownPlant"))
+                    {
+                        Destroy(hit.collider.gameObject);
+                    }
                 }
                 break;
         }
@@ -64,7 +74,7 @@ public class Controller : MonoBehaviour {
 
     public void ResetGameMode()
     {
-        _gameMode = GameModes.None;
+        SetGameMode(GameModes.None);
         _field.ResetCellColors();
     }
 
