@@ -12,7 +12,7 @@ public class UIPlant : MonoBehaviour {
 
     void Start () {
         UIText.text = PlantPrefab.Name+"\nCost: "+PlantPrefab.InitialBuyCost+"\nProfit: "+PlantPrefab.GrowthValueCost[0]+"-"+ PlantPrefab.GrowthValueCost[9];
-        UIImage.sprite = PlantPrefab.GrowStages[PlantPrefab.GrowStages.Length - 1];
+        UIImage.sprite = PlantPrefab.ReadySprite;
         _renderer = GetComponent<Image>();
 
     }

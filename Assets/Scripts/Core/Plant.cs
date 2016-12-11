@@ -10,6 +10,9 @@ public class Plant : MonoBehaviour {
     public int GrowthTime { get { return GrowStages.Length; } }
     public Sprite CurrentGrowSprite { get { return GrowStages[_currentGrowstage]; } }
 
+    public Sprite ReadySprite;
+    public Sprite SpoiledSprite;
+
     public AudioClip Growing;
 
     const int _shapeSideSize = 3;
@@ -63,6 +66,7 @@ public class Plant : MonoBehaviour {
         gameObject.GetComponentInChildren<Animator>().SetTrigger("Float");
         SoundManager.instance.PlaySingle(Growing);
 
+        _renderer.sprite = ReadySprite;
         _renderer.gameObject.tag = "GrownPlant";
     }
 }
