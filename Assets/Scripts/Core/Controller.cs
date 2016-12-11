@@ -85,6 +85,9 @@ public class Controller : MonoBehaviour {
         var y1 = y - 1;
         var y2 = y + 2;
         var ii = 0;
+        if (Money.Instance.Amount < _plantedPlant.InitialBuyCost)
+            return false;
+
         for (var i = x1; i < x2; i++, ii++)
         {
             var jj = 0;

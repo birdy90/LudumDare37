@@ -69,6 +69,9 @@ public class Field : MonoBehaviour {
 
     public void PutPlant(GameObject plant, int x, int y)
     {
+        if (Money.Instance.Amount < plant.GetComponent<Plant>().InitialBuyCost)
+            return;
+
         var newPlant = Instantiate(plant.gameObject);
         var newPlantComponent = newPlant.GetComponent<Plant>();
         newPlantComponent.PlantedTo = new Vector2(x, y);
@@ -78,6 +81,8 @@ public class Field : MonoBehaviour {
                 if (newPlantComponent.GetShape(i + 1, j + 1) == 1)
                     PlantedCells[i + x, j + y] += 1;
         newPlant.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
+
+        Money.Instance.Amount -= newPlantComponent.InitialBuyCost;
     }
 
     public void RemovePlant(GameObject plant)
