@@ -73,4 +73,10 @@ public class Field : MonoBehaviour {
         _plants[x, y] = plant;
         plant.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
     }
+
+    public void ResetCellColors()
+    {
+        foreach (var cell in _earth)
+            cell.SetColor(Color.white);
+    }
 }

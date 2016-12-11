@@ -15,26 +15,32 @@ public class Controller : MonoBehaviour {
     void Start()
     {
         _field = GetComponent<Field>();
-        _gameMode = GameModes.Selecting;
+        _gameMode = GameModes.Planting;
     }
 
 	void Update () {
+        if (Input.GetMouseButton(1))
+        {
+            _gameMode = GameModes.None;
+            _field.ResetCellColors();
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         switch (_gameMode)
         {
             case GameModes.Selecting:
-                if (Physics.Raycast(ray, out hit, 1000f))
-                {
-                    if (hit.collider.CompareTag("Earth"))
-                    {
-                        hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                    }
-                }
                 break;
             case GameModes.Actions:
                 break;
             case GameModes.Planting:
+                Debug.DrawRay(ray.origin, ray.direction, Color.red);
+                _field.ResetCellColors();
+                if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("Earth"))
+                {
+                    // hit.collider.gameObject.GetComponent<Cell>().SetColor(new Color(225f, 130f, 130f, 1f));
+                    hit.collider.gameObject.GetComponent<Cell>().SetColor(Color.green);
+                }
                 break;
         }
 	}
