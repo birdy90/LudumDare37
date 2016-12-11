@@ -40,25 +40,9 @@ public class Controller : MonoBehaviour {
                     var pos = cell.GetPos();
                     var canPlant = CanPlant((int)pos.x, (int)pos.y);
                     var color = canPlant ? Color.green : Color.red;
+                    HighLightPlantPosition(color, (int)pos.x, (int)pos.y);
 
-                    var minI = (int)pos.x - 1;
-                    var maxI = (int)pos.x + 2;
-                    var minJ = (int)pos.y - 1;
-                    var maxJ = (int)pos.y + 2;
-                    var ii = 0;
-                    for (var i = minI; i < maxI; i++, ii++)
-                    {
-                        var jj = 0;
-                        for (var j = minJ; j < maxJ; j++, jj++)
-                            if (_plantedPlant.GetShape(ii, jj) == 1)
-                            {
-                                if (i < 0 || j < 0 || i >= _field.FieldWidth || j >= _field.FieldHeight)
-                                    continue;
-                                _field.Earth[i, j].SetColor(color);
-                            }
-                    }
-
-                    if (color == Color.green && Input.GetMouseButton(0))
+                    if (canPlant && Input.GetMouseButton(0))
                     {
                         ResetGameMode();
                         _field.PutPlant(_plantedPlant.gameObject, (int)pos.x, (int)pos.y);
@@ -96,12 +80,39 @@ public class Controller : MonoBehaviour {
             var jj = 0;
             for (var j = y1; j < y2; j++, jj++)
             {
-                var point = _plantedPlant.GetShape(ii, jj);
-                if (point == 1 && (i < 0 || j < 0 || i >= _field.FieldWidth || j >= _field.FieldHeight))
-                    return false;
+                var plantPoint = _plantedPlant.GetShape(ii, jj);
+                if (!_field.PointInFieldBounds(i, j))
+                {
+                    if (plantPoint == 1)
+                        return false;
+                } else
+                {
+                    if (plantPoint == 1 && _field.PlantedCells[i, j] > 0)
+                        return false;
+                }
             }
         }
         return true;
+    }
+
+    public void HighLightPlantPosition(Color color, int x, int y)
+    {
+        var minI = x - 1;
+        var maxI = x + 2;
+        var minJ = y - 1;
+        var maxJ = y + 2;
+        var ii = 0;
+        for (var i = minI; i < maxI; i++, ii++)
+        {
+            var jj = 0;
+            for (var j = minJ; j < maxJ; j++, jj++)
+                if (_plantedPlant.GetShape(ii, jj) == 1)
+                {
+                    if (!_field.PointInFieldBounds(i, j))
+                        continue;
+                    _field.Earth[i, j].SetColor(color);
+                }
+        }
     }
 
     public void StartPlant(GameObject plant)

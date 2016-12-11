@@ -68,11 +68,18 @@ public class Field : MonoBehaviour {
     public void PutPlant(GameObject plant, int x, int y)
     {
         var newPlant = Instantiate(plant.gameObject);
-        Plants.Add(newPlant.GetComponent<Plant>());
+        var newPlantComponent = newPlant.GetComponent<Plant>();
+        Plants.Add(newPlantComponent);
         for (var i = -1; i < 2; i++)
             for (var j = -1; j < 2; j++)
-                PlantedCells[i + x, j + y] += 1;
+                if (newPlantComponent.GetShape(i + 1, j + 1) == 1)
+                    PlantedCells[i + x, j + y] += 1;
         newPlant.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
+    }
+
+    public bool PointInFieldBounds(int x, int y)
+    {
+        return !(x < 0 || y < 0 || x >= FieldWidth || y >= FieldHeight);
     }
 
     public void ResetCellColors()
