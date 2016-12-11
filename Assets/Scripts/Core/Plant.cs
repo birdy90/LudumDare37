@@ -35,7 +35,13 @@ public class Plant : MonoBehaviour {
     {
         _currentGrowstage++;
         if (_currentGrowstage >= GrowthTime)
-            _currentGrowstage = 0;
-        _renderer.sprite = CurrentGrowSprite;
+            OverGrow();
+        else
+            _renderer.sprite = CurrentGrowSprite;
+    }
+
+    public void OverGrow()
+    {
+
     }
 }
