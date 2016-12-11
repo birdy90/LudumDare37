@@ -60,7 +60,9 @@ public class Controller : MonoBehaviour {
                     _field.ResetCellColors();
                     if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("GrownPlant"))
                     {
-                        Destroy(hit.collider.gameObject);
+                        var plant = hit.collider.gameObject.transform.parent.gameObject;
+                        Destroy(plant);
+                        Field.Instance.Plants.Remove(plant.GetComponent<Plant>());
                     }
                 }
                 break;
@@ -69,6 +71,11 @@ public class Controller : MonoBehaviour {
     
     public void SetGameMode(GameModes mode)
     {
+        if (mode == GameModes.None)
+            Field.Instance.SetCollisionStateForPlants(true);
+        else
+            Field.Instance.SetCollisionStateForPlants(false);
+
         _gameMode = mode;
     }
 

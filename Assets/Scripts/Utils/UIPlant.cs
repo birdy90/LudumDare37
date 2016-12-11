@@ -18,7 +18,7 @@ public class UIPlant : MonoBehaviour {
     }
 	
 	void Update () {
-        if (PlantPrefab.InitialBuyCost < Money.Instance.Amount)
+        if (PlantPrefab.InitialBuyCost <= Money.Instance.Amount)
             _renderer.color = Color.white;
         else
             _renderer.color = Color.red;

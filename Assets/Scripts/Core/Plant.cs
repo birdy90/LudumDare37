@@ -22,11 +22,15 @@ public class Plant : MonoBehaviour {
 
     private int _currentGrowstage;
     private SpriteRenderer _renderer;
+    private BoxCollider _collider;
+
+    public bool Collider { set { _collider.enabled = value; } }
 
     public string Name;
     
 	void Start () {
         _renderer = GetComponentInChildren<SpriteRenderer>();
+        _collider = GetComponentInChildren<BoxCollider>();
         _renderer.sprite = GrowStages[0];
 	}
 

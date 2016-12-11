@@ -90,7 +90,6 @@ public class Field : MonoBehaviour {
         var plantComponent = plant.GetComponent<Plant>();
         var x = (int)plantComponent.PlantedTo.x;
         var y = (int)plantComponent.PlantedTo.y;
-        Plants.Remove(plantComponent);
         for (var i = -1; i < 2; i++)
             for (var j = -1; j < 2; j++)
                 if (plantComponent.GetShape(i + 1, j + 1) == 1)
@@ -100,6 +99,12 @@ public class Field : MonoBehaviour {
     public bool PointInFieldBounds(int x, int y)
     {
         return !(x < 0 || y < 0 || x >= FieldWidth || y >= FieldHeight);
+    }
+
+    public void SetCollisionStateForPlants(bool active)
+    {
+        foreach (var plant in Plants)
+            plant.Collider = active;
     }
 
     public void ResetCellColors()
