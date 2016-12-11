@@ -17,13 +17,17 @@ public class Plant : MonoBehaviour {
     public int[] GrowthValueCost = new int[10];
     public int[] GrowthInfluence = new int[9];
 
+    [HideInInspector]
+    public Vector2 PlantedTo;
+
     private int _currentGrowstage;
     private SpriteRenderer _renderer;
 
     public string Name;
     
 	void Start () {
-        _renderer = GetComponent<SpriteRenderer>();
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+        _renderer.sprite = GrowStages[0];
 	}
 
     public int GetShape(int x, int y)
@@ -31,17 +35,25 @@ public class Plant : MonoBehaviour {
         return Shape[y * _shapeSideSize + x];
     }
 
-    public void Grow()
+    public bool Grow()
     {
         _currentGrowstage++;
         if (_currentGrowstage >= GrowthTime)
-            OverGrow();
+        {
+            _renderer.sprite = GrowStages[GrowStages.Length - 1];
+            return true;
+        }
         else
+        {
             _renderer.sprite = CurrentGrowSprite;
+            return false;
+        }
     }
 
     public void OverGrow()
     {
-
+        Field.Instance.RemovePlant(gameObject);
+        gameObject.GetComponentInChildren<Animator>().SetTrigger("Float");
+        _renderer.gameObject.tag = "GrownPlant";
     }
 }
