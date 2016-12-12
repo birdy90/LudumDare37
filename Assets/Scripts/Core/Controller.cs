@@ -6,6 +6,8 @@ using Completed;
 [RequireComponent(typeof(Field))]
 public class Controller : MonoBehaviour {
 
+    public static Controller Instance;
+
     private GameModes _gameMode = GameModes.None;
     private Field _field;
     private Plant _plantedPlant;
@@ -21,6 +23,7 @@ public class Controller : MonoBehaviour {
 	
     void Start()
     {
+        Instance = this;
         _field = GetComponent<Field>();
     }
 
@@ -37,7 +40,6 @@ public class Controller : MonoBehaviour {
             case GameModes.Actions:
                 break;
             case GameModes.Planting:
-                Debug.DrawRay(ray.origin, ray.direction, Color.red);
                 _field.ResetCellColors();
                 if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("Earth"))
                 {
@@ -49,11 +51,14 @@ public class Controller : MonoBehaviour {
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if (canPlant)  
+                        if (canPlant)
+                        {
                             _field.PutPlant(_plantedPlant.gameObject, (int)pos.x, (int)pos.y);
+                        }
                         else
+                        {
                             SoundManager.instance.PlaySingle(Failure);
-
+                        }
                     }
                 }
                 else
@@ -65,15 +70,14 @@ public class Controller : MonoBehaviour {
             case GameModes.None:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.DrawRay(ray.origin, ray.direction, Color.red);
                     _field.ResetCellColors();
                     if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("GrownPlant"))
                     {
                         var plant = hit.collider.gameObject.transform.parent.gameObject;
                         var plantComponent = plant.GetComponent<Plant>();
                         Trader.Instance.SellPlant(plantComponent);
-                        Field.Instance.Plants.Remove(plantComponent);
                         SoundManager.instance.PlaySingle(PickUp);
+                        Field.Instance.GrownPlants.Remove(plantComponent);
                         Destroy(plant);
                     }
                 }
@@ -83,12 +87,16 @@ public class Controller : MonoBehaviour {
     
     public void SetGameMode(GameModes mode)
     {
-        if (mode == GameModes.None)
-            Field.Instance.SetCollisionStateForPlants(true);
-        else
-            Field.Instance.SetCollisionStateForPlants(false);
-
         _gameMode = mode;
+        UpdateColiisionsForReadyPlants();
+    }
+
+    public void UpdateColiisionsForReadyPlants()
+    {
+        if (_gameMode == GameModes.None)
+            Field.Instance.SetCollisionStateForReadyPlants(true);
+        else
+            Field.Instance.SetCollisionStateForReadyPlants(false);
     }
 
     public void ResetGameMode()
