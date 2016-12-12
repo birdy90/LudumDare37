@@ -12,6 +12,9 @@ public class Plant : MonoBehaviour {
 
     public Sprite ReadySprite;
     public Sprite SpoiledSprite;
+    public Sprite FormLook;
+    public string GoodWith;
+    public string BadWith;
 
     public AudioClip Growing;
 
