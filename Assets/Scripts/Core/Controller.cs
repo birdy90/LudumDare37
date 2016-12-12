@@ -37,7 +37,6 @@ public class Controller : MonoBehaviour {
             case GameModes.Actions:
                 break;
             case GameModes.Planting:
-                Debug.DrawRay(ray.origin, ray.direction, Color.red);
                 _field.ResetCellColors();
                 if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("Earth"))
                 {
@@ -65,15 +64,14 @@ public class Controller : MonoBehaviour {
             case GameModes.None:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.DrawRay(ray.origin, ray.direction, Color.red);
                     _field.ResetCellColors();
                     if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("GrownPlant"))
                     {
                         var plant = hit.collider.gameObject.transform.parent.gameObject;
                         var plantComponent = plant.GetComponent<Plant>();
                         Trader.Instance.SellPlant(plantComponent);
-                        Field.Instance.Plants.Remove(plantComponent);
                         SoundManager.instance.PlaySingle(PickUp);
+                        Field.Instance.GrownPlants.Remove(plantComponent);
                         Destroy(plant);
                     }
                 }
@@ -84,9 +82,9 @@ public class Controller : MonoBehaviour {
     public void SetGameMode(GameModes mode)
     {
         if (mode == GameModes.None)
-            Field.Instance.SetCollisionStateForPlants(true);
+            Field.Instance.SetCollisionStateForReadyPlants(true);
         else
-            Field.Instance.SetCollisionStateForPlants(false);
+            Field.Instance.SetCollisionStateForReadyPlants(false);
 
         _gameMode = mode;
     }

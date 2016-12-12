@@ -26,6 +26,8 @@ public class Plant : MonoBehaviour {
     [HideInInspector]
     public Vector2 PlantedTo;
 
+
+
     private int _currentGrowstage;
     private SpriteRenderer _renderer;
     private BoxCollider _collider;
@@ -50,7 +52,6 @@ public class Plant : MonoBehaviour {
         _currentGrowstage++;
         if (_currentGrowstage >= GrowthTime)
         {
-            _renderer.sprite = GrowStages[GrowStages.Length - 1];
             return true;
         }
         else

@@ -18,6 +18,7 @@ public class Field : MonoBehaviour {
     public Cell[,] Earth;
     [HideInInspector]
     public List<Plant> Plants;
+    public List<Plant> GrownPlants;
     [HideInInspector]
     public int[,] PlantedCells;
     private int[,] _influences;
@@ -30,6 +31,7 @@ public class Field : MonoBehaviour {
         Instance = this;
         Earth = new Cell[FieldWidth, FieldHeight];
         Plants = new List<Plant>();
+        GrownPlants = new List<Plant>();
         PlantedCells = new int[FieldWidth, FieldHeight];
         _influences = new int[FieldWidth, FieldHeight];
         InstantiateEarth();
@@ -100,6 +102,8 @@ public class Field : MonoBehaviour {
             for (var j = -1; j < 2; j++)
                 if (plantComponent.GetShape(i + 1, j + 1) == 1)
                     PlantedCells[i + x, j + y] -= 1;
+        Plants.Remove(plantComponent);
+        GrownPlants.Add(plantComponent);
     }
 
     public bool PointInFieldBounds(int x, int y)
@@ -107,9 +111,9 @@ public class Field : MonoBehaviour {
         return !(x < 0 || y < 0 || x >= FieldWidth || y >= FieldHeight);
     }
 
-    public void SetCollisionStateForPlants(bool active)
+    public void SetCollisionStateForReadyPlants(bool active)
     {
-        foreach (var plant in Plants)
+        foreach (var plant in GrownPlants)
             plant.Collider = active;
     }
 
