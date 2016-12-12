@@ -6,6 +6,8 @@ using Completed;
 [RequireComponent(typeof(Field))]
 public class Controller : MonoBehaviour {
 
+    public static Controller Instance;
+
     private GameModes _gameMode = GameModes.None;
     private Field _field;
     private Plant _plantedPlant;
@@ -21,6 +23,7 @@ public class Controller : MonoBehaviour {
 	
     void Start()
     {
+        Instance = this;
         _field = GetComponent<Field>();
     }
 
@@ -48,11 +51,14 @@ public class Controller : MonoBehaviour {
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if (canPlant)  
+                        if (canPlant)
+                        {
                             _field.PutPlant(_plantedPlant.gameObject, (int)pos.x, (int)pos.y);
+                        }
                         else
+                        {
                             SoundManager.instance.PlaySingle(Failure);
-
+                        }
                     }
                 }
                 else
@@ -81,12 +87,16 @@ public class Controller : MonoBehaviour {
     
     public void SetGameMode(GameModes mode)
     {
-        if (mode == GameModes.None)
+        _gameMode = mode;
+        UpdateColiisionsForReadyPlants();
+    }
+
+    public void UpdateColiisionsForReadyPlants()
+    {
+        if (_gameMode == GameModes.None)
             Field.Instance.SetCollisionStateForReadyPlants(true);
         else
             Field.Instance.SetCollisionStateForReadyPlants(false);
-
-        _gameMode = mode;
     }
 
     public void ResetGameMode()
