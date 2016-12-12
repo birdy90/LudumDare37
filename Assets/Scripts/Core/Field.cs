@@ -177,7 +177,9 @@ public class Field : MonoBehaviour {
     {
         foreach (var influencingPlant in plant.Influences)
         {
-            var influence = influencingPlant.GrowthInfluence[Plant.PlantNumber[plant.gameObject.tag]];
+            var index = Plant.PlantNumber[plant.gameObject.tag];
+            if (index == 9) { continue; }
+            var influence = influencingPlant.GrowthInfluence[index];
             plant.InitialGrowthValue += influence;
         }
         foreach (var bonus in Bonus.Bought)
