@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7297690298fe1534b809ec47cab6d2ce
-timeCreated: 1481493464
+timeCreated: 1481529205
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -42,6 +42,18 @@ TextureImporter:
     21300070: plants2_35
     21300072: plants2_36
     21300074: plants2_37
+    21300076: plants2_38
+    21300078: plants2_39
+    21300080: plants2_40
+    21300082: plants2_41
+    21300084: plants2_42
+    21300086: plants2_43
+    21300088: plants2_44
+    21300090: plants2_45
+    21300092: plants2_46
+    21300094: plants2_47
+    21300096: plants2_48
+    21300098: plants2_49
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -432,7 +444,7 @@ TextureImporter:
       name: plants2_26
       rect:
         serializedVersion: 2
-        x: 288
+        x: 72
         y: 288
         width: 72
         height: 72
@@ -445,8 +457,8 @@ TextureImporter:
       name: plants2_27
       rect:
         serializedVersion: 2
-        x: 0
-        y: 216
+        x: 144
+        y: 288
         width: 72
         height: 72
       alignment: 0
@@ -458,8 +470,8 @@ TextureImporter:
       name: plants2_28
       rect:
         serializedVersion: 2
-        x: 288
-        y: 216
+        x: 216
+        y: 288
         width: 72
         height: 72
       alignment: 0
@@ -471,8 +483,8 @@ TextureImporter:
       name: plants2_29
       rect:
         serializedVersion: 2
-        x: 0
-        y: 144
+        x: 288
+        y: 288
         width: 72
         height: 72
       alignment: 0
@@ -484,6 +496,123 @@ TextureImporter:
       name: plants2_30
       rect:
         serializedVersion: 2
+        x: 0
+        y: 216
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_31
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 216
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_32
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 216
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_33
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 216
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_34
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 216
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_36
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 144
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_37
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 144
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_38
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 144
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_39
+      rect:
+        serializedVersion: 2
         x: 288
         y: 144
         width: 72
@@ -494,7 +623,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: plants2_31
+      name: plants2_40
       rect:
         serializedVersion: 2
         x: 0
@@ -507,7 +636,46 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: plants2_32
+      name: plants2_41
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 72
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_42
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 72
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_43
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 72
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plants2_44
       rect:
         serializedVersion: 2
         x: 288
@@ -520,7 +688,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: plants2_33
+      name: plants2_45
       rect:
         serializedVersion: 2
         x: 0
@@ -533,7 +701,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: plants2_34
+      name: plants2_46
       rect:
         serializedVersion: 2
         x: 72
@@ -546,7 +714,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: plants2_35
+      name: plants2_47
       rect:
         serializedVersion: 2
         x: 144
@@ -559,7 +727,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: plants2_36
+      name: plants2_48
       rect:
         serializedVersion: 2
         x: 216
@@ -572,7 +740,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: plants2_37
+      name: plants2_49
       rect:
         serializedVersion: 2
         x: 288
