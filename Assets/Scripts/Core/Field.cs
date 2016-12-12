@@ -1,6 +1,8 @@
 ﻿using Completed;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Field : MonoBehaviour {
 
@@ -68,6 +70,11 @@ public class Field : MonoBehaviour {
             if (plant != null)
                 if (plant.Grow())
                     grownPlants.Add(plant);
+                    if (plant.Name == "Flower")
+            {
+                SceneManager.LoadScene("YouWin");
+            }
+                
         }
         foreach (var plant in grownPlants)
             plant.OverGrow();

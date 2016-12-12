@@ -21,6 +21,10 @@ public class MainMenu : MonoBehaviour {
         PlayerPrefs.SetInt("GameType", (int)GameTypes.Zen);
     }
 
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void Exit()
     {
         Application.Quit();

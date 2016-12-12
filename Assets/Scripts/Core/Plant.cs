@@ -51,9 +51,11 @@ public class Plant : MonoBehaviour {
     public bool Grow()
     {
         _currentGrowstage++;
+        
         if (_currentGrowstage >= GrowthTime)
         {
             _renderer.sprite = GrowStages[GrowStages.Length - 1];
+            
             return true;
         }
         else
