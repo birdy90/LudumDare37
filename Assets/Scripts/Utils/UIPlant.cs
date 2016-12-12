@@ -15,6 +15,8 @@ public class UIPlant : MonoBehaviour {
         UIImage.sprite = PlantPrefab.ReadySprite;
         _renderer = GetComponent<Image>();
 
+
+
     }
 	
 	void Update () {

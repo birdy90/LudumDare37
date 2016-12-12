@@ -70,7 +70,9 @@ public class Controller : MonoBehaviour {
                     if (Physics.Raycast(ray.origin, ray.direction, out hit) && hit.collider.CompareTag("GrownPlant"))
                     {
                         var plant = hit.collider.gameObject.transform.parent.gameObject;
-                        Field.Instance.Plants.Remove(plant.GetComponent<Plant>());
+                        var plantComponent = plant.GetComponent<Plant>();
+                        Trader.Instance.SellPlant(plantComponent);
+                        Field.Instance.Plants.Remove(plantComponent);
                         SoundManager.instance.PlaySingle(PickUp);
                         Destroy(plant);
                     }
