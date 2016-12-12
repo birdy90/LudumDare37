@@ -180,6 +180,10 @@ public class Field : MonoBehaviour {
             var influence = influencingPlant.GrowthInfluence[Plant.PlantNumber[plant.gameObject.tag]];
             plant.InitialGrowthValue += influence;
         }
+        foreach (var bonus in Bonus.Bought)
+        {
+            plant.InitialGrowthValue += bonus.Value;
+        }
     }
 
     public void RemoveInfluences(Plant plant)
