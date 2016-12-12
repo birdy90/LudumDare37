@@ -22,7 +22,7 @@ public class Trader : MonoBehaviour {
                 if (plant.InitialGrowthValue >= 0)
                 {
                     var growthArrayIndex = Math.Min(plant.InitialGrowthValue / 5, 9);
-                    gameObject.GetComponent<Money>().Amount += plant.InitialGrowthValue;
+                    gameObject.GetComponent<Money>().Amount += plant.GrowthValueCost[growthArrayIndex];
                 }
                 break;
             }
