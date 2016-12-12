@@ -4,9 +4,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-    public void Startgame()
+    public enum GameTypes
+    {
+        Normal, Zen
+    }
+
+    public void StartGame()
     {
         SceneManager.LoadScene("Game");
+        PlayerPrefs.SetInt("GameType", (int)GameTypes.Normal);
+    }
+
+    public void StartZengame()
+    {
+        SceneManager.LoadScene("Game");
+        PlayerPrefs.SetInt("GameType", (int)GameTypes.Zen);
     }
 
     public void Exit()
