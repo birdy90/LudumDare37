@@ -15,16 +15,16 @@ public class Trader : MonoBehaviour {
 
     public void SellPlant(Plant soldPlant)
     {
-        foreach (var plant in Plants)
+    //    foreach (var plant in Plants)
         {
-            if (plant.gameObject.tag == soldPlant.gameObject.tag)
+     //       if (plant.gameObject.tag == soldPlant.gameObject.tag)
             {
-                if (plant.InitialGrowthValue >= 0)
+                if (soldPlant.InitialGrowthValue >= 0)
                 {
-                    var growthArrayIndex = Math.Min(plant.InitialGrowthValue / 5, 9);
-                    gameObject.GetComponent<Money>().Amount += plant.GrowthValueCost[growthArrayIndex];
+                    var growthArrayIndex = Math.Min(soldPlant.InitialGrowthValue / 5, 9);
+                    gameObject.GetComponent<Money>().Amount += soldPlant.GrowthValueCost[growthArrayIndex];
                 }
-                break;
+               // break;
             }
         }
     }
