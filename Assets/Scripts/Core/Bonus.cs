@@ -32,9 +32,10 @@ public class Bonus : MonoBehaviour {
 
     public void BuyBonus()
     {
-        _button.interactable = false;
+      
         if (Bought.Contains(this)|| Money.Instance.Amount < Cost)
             return;
+        _button.interactable = false;
         Money.Instance.Amount -= Cost;
         SoundManager.instance.PlaySingle(Controller.Instance.Clicking);
         Bought.Add(this);
