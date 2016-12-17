@@ -31,8 +31,7 @@ public class Bonus : MonoBehaviour {
     }
 
     public void BuyBonus()
-    {
-      
+    {      
         if (Bought.Contains(this)|| Money.Instance.Amount < Cost)
             return;
         _button.interactable = false;

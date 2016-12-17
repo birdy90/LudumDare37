@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using System;
 
 public class UIPlant : MonoBehaviour {
     public Text UIText;
@@ -17,7 +17,7 @@ public class UIPlant : MonoBehaviour {
         }
         else if (PlantPrefab.InitialBuyCost > 1000)
         {
-            UIText.text = PlantPrefab.Name + "\nCost: " + (double)PlantPrefab.InitialBuyCost / 1000 + "K\nProfit: " + (double)PlantPrefab.GrowthValueCost[0] / 1000 + "K-" + (double)PlantPrefab.GrowthValueCost[9] / 1000 + "K\nTime: " + PlantPrefab.GrowthTime * PlantPrefab.OneStageGrowthTime;
+            UIText.text = PlantPrefab.Name + "\nCost: " + String.Format("{0:0.0}", (double)PlantPrefab.InitialBuyCost / 1000)+ "K\nProfit: " + String.Format("{0:0.0}", (double)PlantPrefab.GrowthValueCost[0] / 1000 )+ "K-" + String.Format("{0:0.0}", (double)PlantPrefab.GrowthValueCost[9] / 1000 )+ "K\nTime: " + PlantPrefab.GrowthTime * PlantPrefab.OneStageGrowthTime;
         }
         else 
             UIText.text = PlantPrefab.Name+"\nCost: "+PlantPrefab.InitialBuyCost+"\nProfit: "+PlantPrefab.GrowthValueCost[0]+"-"+ PlantPrefab.GrowthValueCost[9]+"\nTime: "+PlantPrefab.GrowthTime*PlantPrefab.OneStageGrowthTime;
